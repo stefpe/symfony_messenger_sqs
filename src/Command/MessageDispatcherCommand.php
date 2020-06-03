@@ -28,14 +28,8 @@ class MessageDispatcherCommand extends Command
     public function __construct(MessageBusInterface $messageBus)
     {
         $this->messageBus = $messageBus;
+        $this->setDescription('Dispatch a message to the configured queuing system');
         parent::__construct(self::$defaultName);
-    }
-
-
-    protected function configure()
-    {
-        $this
-            ->setDescription('Dispatch a message to the configured queuing system');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -43,7 +37,7 @@ class MessageDispatcherCommand extends Command
         $io = new SymfonyStyle($input, $output);
 
         $message = new TestMessage();
-        $message->setPayload(date('Y-m-d H:i:s') . 'here is my content');
+        $message->setPayload(date('Y-m-d H:i:s') . ' here is my content');
         $this->messageBus->dispatch($message);
 
         $io->success('Message dispatched successfully!');
