@@ -1,0 +1,6 @@
+framework:
+    messenger:
+        transports:
+            sqs: "enqueue://default?topic[name]=test&queue[name]=test&receiveTimeout=3"
+        routing:
+            'App\Message\TestMessage': sqs
